@@ -36,7 +36,7 @@ public class CatchObject : MonoBehaviour
                 }
                 // 고정 해제
                 fixedObject = null;
-                Debug.Log("오브젝트 고정 해제");
+                //Debug.Log("오브젝트 고정 해제");
             }
             else
             {
@@ -52,8 +52,8 @@ public class CatchObject : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, layermask))
                 {
-                    Debug.Log("레이캐스트 히트!");
-                    Debug.Log($"히트 오브젝트 이름: {hit.collider.gameObject.name}");
+                    //Debug.Log("레이캐스트 히트!");
+                    //Debug.Log($"히트 오브젝트 이름: {hit.collider.gameObject.name}");
 
                     if (hit.collider.CompareTag(targetTag))
                     {
@@ -61,12 +61,12 @@ public class CatchObject : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("히트된 오브젝트는 대상 태그가 아닙니다.");
+                        //Debug.Log("히트된 오브젝트는 대상 태그가 아닙니다.");
                     }
                 }
                 else
                 {
-                    Debug.Log("레이캐스트 미스!");
+                    //Debug.Log("레이캐스트 미스!");
                 }
             }
         }
