@@ -8,6 +8,7 @@ TagManager:
   - Character
   - BULLET
   - Target
+  - babyCrib
   layers:
   - Default
   - TransparentFX
