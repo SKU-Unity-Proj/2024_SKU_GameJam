@@ -123,7 +123,11 @@ public class BehaviorController : MonoBehaviour
         myAnimator.SetFloat(vFloat, v, 0.1f, Time.deltaTime);
 
         isSprint = Input.GetButton(ButtonName.Sprint);
-        isGrab = Input.GetButton(ButtonName.Grab); // Grab 상태 제어
+
+        if (Input.GetButtonDown(ButtonName.Grab))
+        {
+            isGrab = !isGrab; // Grab 상태 토글
+        }
 
         myAnimator.SetBool(grabBool, isGrab); // 애니메이터에 grab 상태 전달
 
