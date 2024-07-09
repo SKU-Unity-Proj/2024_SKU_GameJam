@@ -15,7 +15,7 @@ public class MoveBehaviour : GenericBehaviour
 
     public float jumpHeight = 1.5f;
     public float jumpInertialForce = 10f; //점프 관성
-    public float speed, speedSeeker;
+    public float speed;
 
     private int jumpBool;
     private int groundedBool;
@@ -35,7 +35,6 @@ public class MoveBehaviour : GenericBehaviour
         //
         behaviourController.SubScribeBehavior(this);
         behaviourController.RegisterDefaultBehaviour(this.behaviorCode);
-        speedSeeker = runSpeed;
     }
     Vector3 Rotating(float horizontal, float vertical)
     {
@@ -88,9 +87,6 @@ public class MoveBehaviour : GenericBehaviour
         Rotating(horizontal, vertical);
         Vector2 dir = new Vector2(horizontal, vertical);
         speed = Vector2.ClampMagnitude(dir, 1f).magnitude;
-        speedSeeker += Input.GetAxis("Mouse ScrollWheel");
-        speedSeeker = Mathf.Clamp(speedSeeker, walkSpeed, runSpeed);
-        speed *= speedSeeker;
         if (behaviourController.IsSprinting())
         {
             speed = sprintSpeed;

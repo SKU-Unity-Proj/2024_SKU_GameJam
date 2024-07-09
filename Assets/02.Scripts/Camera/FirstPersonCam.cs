@@ -5,18 +5,25 @@ using UnityEngine;
 public class FirstPersonCam : MonoBehaviour
 {
     public Transform player;
-    public Vector3 eyeOffset = new Vector3(0.0f, 1.6f, 0.0f); // 플레이어 눈 위치
 
     public float smooth = 10f;
     public float horizontalAimingSpeed = 6.0f;
     public float verticalAimingSpeed = 6.0f;
+
+    // 각도 제한
     public float maxVerticalAngle = 30.0f;
     public float minVerticalAngle = -60.0f;
+
     public float recoilAngleBounce = 5.0f;
     private float angleH = 0.0f;
     private float angleV = 0.0f;
+
+
+    public Transform CamPos;
     private Transform cameraTransform;
     private Camera myCamera;
+
+
     private float defaultFOV;
     private float targetFOV;
     private float targetMaxVerticalAngle;
@@ -35,14 +42,14 @@ public class FirstPersonCam : MonoBehaviour
         cameraTransform = transform;
         myCamera = cameraTransform.GetComponent<Camera>();
 
-        cameraTransform.position = player.position + eyeOffset;
+        cameraTransform.position = CamPos.position;
         cameraTransform.rotation = Quaternion.identity;
 
         defaultFOV = myCamera.fieldOfView;
         angleH = player.eulerAngles.y;
 
         ResetFOV();
-        ResetMaxVerticalAngle();
+        ResetMaxAngle();
     }
 
     public void ResetFOV()
@@ -50,7 +57,7 @@ public class FirstPersonCam : MonoBehaviour
         this.targetFOV = defaultFOV;
     }
 
-    public void ResetMaxVerticalAngle()
+    public void ResetMaxAngle()
     {
         targetMaxVerticalAngle = maxVerticalAngle;
     }
@@ -77,13 +84,25 @@ public class FirstPersonCam : MonoBehaviour
 
         myCamera.fieldOfView = Mathf.Lerp(myCamera.fieldOfView, targetFOV, Time.deltaTime);
 
-        // 카메라 위치는 고정
-        cameraTransform.position = player.position + eyeOffset;
+        // 플레이어의 이동 방향과 카메라의 바라보는 방향이 다르면 카메라가 우선적으로 이동하는 부분
+        Vector3 cameraDirection = cameraTransform.forward;
+        Vector3 playerDirection = player.forward;
+
+        if (Vector3.Dot(cameraDirection, playerDirection) < 0.9f)
+        {
+            Vector3 newPosition = CamPos.position;
+            cameraTransform.position = Vector3.Lerp(cameraTransform.position, newPosition, smooth * Time.deltaTime);
+        }
+        else
+        {
+            cameraTransform.position = CamPos.position;
+        }
 
         if (recoilAngle > 0.0f)
         {
             recoilAngle -= recoilAngleBounce * Time.deltaTime;
         }
+
         else if (recoilAngle < 0.0f)
         {
             recoilAngle += recoilAngleBounce * Time.deltaTime;
