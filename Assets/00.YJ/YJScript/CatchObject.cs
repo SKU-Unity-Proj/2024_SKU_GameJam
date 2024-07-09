@@ -8,11 +8,14 @@ public class CatchObject : MonoBehaviour
 {
     public Camera mainCamera; // 카메라
     public string targetTag = "Target"; // 대상 오브젝트의 태그
+    public string agentTag = "Agent"; // 대상 오브젝트의 태그
     public float fixedDistance = 5.0f; // 카메라 정면에서의 거리
     public float rayDistance = 100.0f; // 레이캐스트 거리
     public float scrollSpeed = 2.0f; // 마우스 휠로 조절할 때의 속도
 
     public LayerMask outlineMask = TagAndLayer.LayerMasking.Outline;
+
+    public bool isGround = true; // 땅에 있는지 여부를 나타내는 변수
 
     private GameObject fixedObject = null; // 현재 고정된 오브젝트
 
@@ -39,6 +42,7 @@ public class CatchObject : MonoBehaviour
                 }
                 // 고정 해제
                 fixedObject = null;
+                isGround = true; // 고정 해제 시 isGround를 true로 설정
                 Debug.Log("오브젝트 고정 해제");
             }
             else
@@ -57,6 +61,13 @@ public class CatchObject : MonoBehaviour
                     if (hit.collider.CompareTag(targetTag))
                     {
                         fixedObject = hit.collider.gameObject;
+                        //isGround = false; // 오브젝트 고정 시 isGround를 false로 설정
+                        Debug.Log("대상 오브젝트 고정됨");
+                    }
+                    if (hit.collider.CompareTag(agentTag))
+                    {
+                        fixedObject = hit.collider.gameObject;
+                        isGround = false; // 오브젝트 고정 시 isGround를 false로 설정
                         Debug.Log("대상 오브젝트 고정됨");
                     }
                     else

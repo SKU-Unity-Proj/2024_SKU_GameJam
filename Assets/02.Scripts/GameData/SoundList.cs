@@ -35,5 +35,6 @@ public enum SoundList
     nothingVoice7= 27,
     nothingVoice8= 28,
     nothingVoice9= 29,
+    cryVoice= 30,
 
 }

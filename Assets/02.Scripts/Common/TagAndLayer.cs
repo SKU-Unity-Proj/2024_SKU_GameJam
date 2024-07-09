@@ -13,6 +13,7 @@ namespace FC
             public const string IgnoreRayCast = "Ignore Raycast";
             public const string Water = "Water";
             public const string UI = "UI";
+            public const string Ground = "Ground";
             public const string Cover = "Cover";
             public const string IgnoreShot = "Ignore Shot";
             public const string CoverInvisible = "Cover Invisible";
@@ -33,6 +34,7 @@ namespace FC
             IgnoreRayCast = 2,
             Water  = 4,
             UI = 5,
+            Ground = 6,
             Cover = 8,
             IgnoreShot = 9,
             CoverInvisible = 10,
@@ -53,6 +55,7 @@ namespace FC
             public const int IgnoreRayCast = 1 << 2;
             public const int Water = 1 << 4;
             public const int UI = 1 << 5;
+            public const int Ground = 1 << 6;
             public const int Cover = 1 << 8;
             public const int IgnoreShot = 1 << 9;
             public const int CoverInvisible = 1 << 10;
