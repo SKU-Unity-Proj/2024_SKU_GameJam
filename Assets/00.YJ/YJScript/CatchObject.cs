@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CatchObject : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CatchObject : MonoBehaviour
     public float scrollSpeed = 2.0f; // 마우스 휠로 조절할 때의 속도
     public LayerMask layermask;
 
-    private GameObject fixedObject = null; // 현재 고정된 오브젝트
+    public GameObject fixedObject = null; // 현재 고정된 오브젝트
 
     void Update()
     {
@@ -47,13 +48,10 @@ public class CatchObject : MonoBehaviour
                 Ray ray = new Ray(rayOrigin, rayDirection);
                 RaycastHit hit;
 
-                // 레이 방향을 시각적으로 표시
-                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2f); 
-
-                if (Physics.Raycast(ray, out hit, layermask))
+                if (Physics.Raycast(ray, out hit, 1 << LayerMask.NameToLayer("Outline")))
                 {
                     //Debug.Log("레이캐스트 히트!");
-                    //Debug.Log($"히트 오브젝트 이름: {hit.collider.gameObject.name}");
+                    Debug.Log($"히트 오브젝트 이름: {hit.collider.gameObject.name}");
 
                     if (hit.collider.CompareTag(targetTag))
                     {
@@ -74,18 +72,23 @@ public class CatchObject : MonoBehaviour
         // 오브젝트를 카메라 정면의 고정 위치에 고정
         if (fixedObject != null)
         {
-            if (fixedObject.gameObject.name == "baby")
-            {
-                Vector3 fixedPositions = mainCamera.transform.position + mainCamera.transform.forward * 1f;
-                fixedObject.transform.position = fixedPositions;
-                fixedObject.transform.rotation = mainCamera.transform.rotation;
-            }
-            else
-            {
-                Vector3 fixedPosition = mainCamera.transform.position + mainCamera.transform.forward * fixedDistance;
-                fixedObject.transform.position = fixedPosition;
-                fixedObject.transform.rotation = mainCamera.transform.rotation;
-            }
+            //if (fixedObject.gameObject.name == "baby")
+            //{
+            //    Vector3 fixedPositions = mainCamera.transform.position + mainCamera.transform.forward * 1f;
+            //    fixedObject.transform.position = fixedPositions;
+            //    fixedObject.transform.rotation = mainCamera.transform.rotation;
+            //}
+            //else
+            //{
+            //    Vector3 fixedPosition = mainCamera.transform.position + mainCamera.transform.forward * fixedDistance;
+            //    fixedObject.transform.position = fixedPosition;
+            //    fixedObject.transform.rotation = mainCamera.transform.rotation;
+            //}
+            Vector3 fixedPosition = mainCamera.transform.position + mainCamera.transform.forward * fixedDistance;
+            fixedObject.transform.position = fixedPosition;
+            fixedObject.transform.rotation = mainCamera.transform.rotation;
         }
+
+        Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * 50f, Color.red, 2f);
     }
 }
