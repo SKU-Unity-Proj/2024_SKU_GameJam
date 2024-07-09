@@ -15,7 +15,12 @@ namespace SojaExiles
 		void Start()
 		{
 			open = false;
-		}
+            GameObject playerObject = GameObject.FindWithTag("Player");
+            if (playerObject != null)
+            {
+                Player = playerObject.transform;
+            }
+        }
 
 		void OnMouseOver()
 		{
@@ -23,7 +28,7 @@ namespace SojaExiles
 				if (Player)
 				{
 					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 15)
+					if (dist < 5f)
 					{
 						if (open == false)
 						{
@@ -53,18 +58,18 @@ namespace SojaExiles
 
 		IEnumerator opening()
 		{
-			print("you are opening the door");
+			//("you are opening the door");
 			openandclose.Play("Opening");
 			open = true;
-			yield return new WaitForSeconds(.5f);
+			yield return new WaitForSeconds(0.5f);
 		}
 
 		IEnumerator closing()
 		{
-			print("you are closing the door");
+			//print("you are closing the door");
 			openandclose.Play("Closing");
 			open = false;
-			yield return new WaitForSeconds(.5f);
+			yield return new WaitForSeconds(0.5f);
 		}
 
 

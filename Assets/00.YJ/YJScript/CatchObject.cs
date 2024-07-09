@@ -9,6 +9,7 @@ public class CatchObject : MonoBehaviour
     public float fixedDistance = 5.0f; // 카메라 정면에서의 거리
     public float rayDistance = 100.0f; // 레이캐스트 거리
     public float scrollSpeed = 2.0f; // 마우스 휠로 조절할 때의 속도
+    public LayerMask layermask;
 
     private GameObject fixedObject = null; // 현재 고정된 오브젝트
 
@@ -49,7 +50,7 @@ public class CatchObject : MonoBehaviour
                 // 레이 방향을 시각적으로 표시
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2f); 
 
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out hit, layermask))
                 {
                     Debug.Log("레이캐스트 히트!");
                     Debug.Log($"히트 오브젝트 이름: {hit.collider.gameObject.name}");
