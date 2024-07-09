@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AgentVisibilityManager : MonoBehaviour
 {
     public Camera mainCamera; // 플레이어의 카메라
-    public string agentTag = "Agent"; // Agent 태그
+    public List<GameObject> agents; // Agent 리스트
 
     public Transform soundpos;
 
@@ -14,8 +14,8 @@ public class AgentVisibilityManager : MonoBehaviour
     public float checkInterval = 1.0f; // 시야 체크 간격
     public float visibilityTimeout = 15.0f; // 시야에 보이지 않는 시간
     public CanvasGroup alertImage; // 알림 이미지를 포함한 CanvasGroup
-
     public SoundList crySound;
+
     private Dictionary<GameObject, float> agentLastSeenTime; // 에이전트 마지막으로 보인 시간을 저장하는 딕셔너리
 
     private Coroutine blinkCoroutine; // 깜빡이는 코루틴
@@ -23,10 +23,14 @@ public class AgentVisibilityManager : MonoBehaviour
 
     private void Start()
     {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main; // 메인 카메라 참조
+        }
+
         agentLastSeenTime = new Dictionary<GameObject, float>();
 
-        // 모든 에이전트를 찾고 초기화
-        GameObject[] agents = GameObject.FindGameObjectsWithTag(agentTag);
+        // 모든 에이전트를 초기화
         foreach (GameObject agent in agents)
         {
             agentLastSeenTime[agent] = Time.time;
@@ -44,10 +48,11 @@ public class AgentVisibilityManager : MonoBehaviour
             yield return new WaitForSeconds(checkInterval);
 
             bool anyAgentInvisible = false;
-            foreach (GameObject agent in agentLastSeenTime.Keys)
+            foreach (GameObject agent in agents)
             {
                 if (IsInView(mainCamera, agent))
                 {
+                    Debug.Log("Find!");
                     agentLastSeenTime[agent] = Time.time; // 에이전트가 시야에 보이면 시간 업데이트
                 }
                 else if (Time.time - agentLastSeenTime[agent] > visibilityTimeout)
@@ -80,8 +85,30 @@ public class AgentVisibilityManager : MonoBehaviour
                 if (soundCoroutine != null)
                 {
                     StopCoroutine(soundCoroutine);
+                    SoundManager.Instance.Stop(true);
                     soundCoroutine = null;
                 }
+            }
+        }
+    }
+
+    public void SetAlertImageAlpha(float alpha)
+    {
+        alertImage.alpha = alpha;
+
+        if (alpha == 0)
+        {
+            if (blinkCoroutine != null)
+            {
+                StopCoroutine(blinkCoroutine);
+                blinkCoroutine = null;
+            }
+
+            if (soundCoroutine != null)
+            {
+                StopCoroutine(soundCoroutine);
+                
+                soundCoroutine = null;
             }
         }
     }
@@ -136,3 +163,4 @@ public class AgentVisibilityManager : MonoBehaviour
         alertImage.alpha = endAlpha;
     }
 }
+

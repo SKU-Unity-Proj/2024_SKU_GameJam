@@ -18,6 +18,12 @@ public class CatchObject : MonoBehaviour
     public bool isGround = true; // 땅에 있는지 여부를 나타내는 변수
 
     private GameObject fixedObject = null; // 현재 고정된 오브젝트
+    private AgentVisibilityManager visibilityManager; // AgentVisibilityManager 참조
+
+    void Start()
+    {
+        visibilityManager = FindObjectOfType<AgentVisibilityManager>();
+    }
 
     void Update()
     {
@@ -67,6 +73,7 @@ public class CatchObject : MonoBehaviour
                     if (hit.collider.CompareTag(agentTag))
                     {
                         fixedObject = hit.collider.gameObject;
+                        //visibilityManager.SetAlertImageAlpha(0); // 아기를 잡으면 이미지 알파값을 0으로 설정
                         isGround = false; // 오브젝트 고정 시 isGround를 false로 설정
                         Debug.Log("대상 오브젝트 고정됨");
                     }
