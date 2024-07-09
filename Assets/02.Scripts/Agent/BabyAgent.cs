@@ -5,6 +5,7 @@ public class BabyAgent : MonoBehaviour
 {
     private Animator _anim;
     private NavMeshAgent _agent;
+
     public float wanderRadius = 10f; // 아기가 이동할 범위 반경
     public float wanderTimer = 5f; // 새로운 목적지를 설정하는 시간 간격
 
@@ -14,6 +15,7 @@ public class BabyAgent : MonoBehaviour
     {
         _anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+
         timer = wanderTimer;
     }
 
@@ -33,7 +35,6 @@ public class BabyAgent : MonoBehaviour
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     {
         Vector3 randDirection = Random.insideUnitSphere * dist;
-
         randDirection += origin;
 
         NavMeshHit navHit;
@@ -52,7 +53,6 @@ public class BabyAgent : MonoBehaviour
             if (StateLayer == 1)
                 SetLayerPriority(1, 1);
         }
-
     }
 
     private void SetLayerPriority(int StateLayer = 1, int Priority = 1) // 애니메이터의 레이어 우선순위 값(무게) 설정

@@ -21,7 +21,9 @@ namespace FC
             public const string Bound = "Bound";
             public const string Environment = "Environment";
             public const string Tank = "Tank";
-          
+            public const string Outline = "Outline";
+            public const string CheckLayer = "CheckLayer";
+
         }
 
         public enum LayerIndex
@@ -39,8 +41,9 @@ namespace FC
             Bound = 13,
             Environment = 14,
             Tank = 15,
-            
-            
+            Outline = 16,
+            CheckLayer = 17,
+
         }
 
         public class LayerMasking
@@ -58,6 +61,8 @@ namespace FC
             public const int Bound = 1 << 13;
             public const int Environment = 1 << 14;
             public const int Tank = 1 << 15;
+            public const int Outline = 1 << 16;
+            public const int CheckLayer = 1 << 17;
         }
 
         public static int GetLayerByName(string layerName)
