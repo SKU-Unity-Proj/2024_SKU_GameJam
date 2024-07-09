@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Character
   - BULLET
+  - Target
   layers:
   - Default
   - TransparentFX

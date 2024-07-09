@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class HitOutline : MonoBehaviour
 {
-    private Camera mainCamera;
+    public Camera mainCamera;
     public LayerMask layerMask;
     private float raycastDistance = 50f;
     private Outline currentOutline;
-
-    private void Start()
-    {
-        mainCamera = Camera.main;
-    }
 
     void Update()
     {
