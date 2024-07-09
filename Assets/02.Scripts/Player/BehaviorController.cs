@@ -18,11 +18,16 @@ public class BehaviorController : MonoBehaviour
 
     // 캐싱.
     public Transform playerCamera;
+    public TransferFunction Checkboard;
     private Animator myAnimator;
     private Rigidbody myRigidbody;
     //private ThirdPersonOrbitCam camSprint;
     //private ThirdTankOrbitCam camSprintT;
     private Transform myTransform;
+
+    public Transform headTransform;
+    public GameObject checkBoardPrefab; // 체크보드 프리팹
+    private GameObject spawnedCheckBoard; // 생성된 체크보드
 
     // 기본 속성 값들.
     private float h; // horizontal axis
@@ -126,10 +131,21 @@ public class BehaviorController : MonoBehaviour
 
         if (Input.GetButtonDown(ButtonName.Grab))
         {
-            isGrab = !isGrab; // Grab 상태 토글
+            if (spawnedCheckBoard == null)
+            {
+                // 체크보드 프리팹 생성
+                Vector3 spawnPosition = headTransform.position + headTransform.forward * 1.5f;
+                Quaternion spawnRotation = Quaternion.Euler(90, 180, 0);
+                spawnedCheckBoard = Instantiate(checkBoardPrefab, spawnPosition, spawnRotation);
+            }
+            else
+            {
+                // 체크보드 프리팹 삭제
+                Destroy(spawnedCheckBoard);
+            }
         }
 
-        myAnimator.SetBool(grabBool, isGrab); // 애니메이터에 grab 상태 전달
+        
 
         if ((IsSprinting()))
         {
