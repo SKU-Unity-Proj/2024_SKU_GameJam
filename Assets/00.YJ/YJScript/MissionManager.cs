@@ -47,13 +47,6 @@ public class MissionManager : MonoBehaviour
     // 미션 리스트
     public List<Mission> missions = new List<Mission>();
 
-    // 초기화 함수
-    void Start()
-    {
-        // 첫 번째 미션의 완료 상태를 false에서 true로 변경
-        ChangeMissionStatus(1, true);
-    }
-
     // 특정 미션의 완료 상태를 변경하는 함수
     public void ChangeMissionStatus(int missionId, bool isCompleted)
     {

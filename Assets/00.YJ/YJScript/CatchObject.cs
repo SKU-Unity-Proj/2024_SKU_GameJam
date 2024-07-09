@@ -74,9 +74,18 @@ public class CatchObject : MonoBehaviour
         // 오브젝트를 카메라 정면의 고정 위치에 고정
         if (fixedObject != null)
         {
-            Vector3 fixedPosition = mainCamera.transform.position + mainCamera.transform.forward * fixedDistance;
-            fixedObject.transform.position = fixedPosition;
-            fixedObject.transform.rotation = mainCamera.transform.rotation;
+            if (fixedObject.gameObject.name == "baby")
+            {
+                Vector3 fixedPositions = mainCamera.transform.position + mainCamera.transform.forward * 1f;
+                fixedObject.transform.position = fixedPositions;
+                fixedObject.transform.rotation = mainCamera.transform.rotation;
+            }
+            else
+            {
+                Vector3 fixedPosition = mainCamera.transform.position + mainCamera.transform.forward * fixedDistance;
+                fixedObject.transform.position = fixedPosition;
+                fixedObject.transform.rotation = mainCamera.transform.rotation;
+            }
         }
     }
 }
