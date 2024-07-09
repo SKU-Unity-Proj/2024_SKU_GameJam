@@ -31,10 +31,14 @@ public class BehaviorController : MonoBehaviour
     private bool changedFOV; // 달리기 동작이 카메라 시야각이 변경되었을 때 저장됐는지.
     public float sprintFOV = 100; // 달리기 시야각.
     private Vector3 lastDirection; // 마지막 향했던 방향.
+
     private bool isSprint;
+    private bool isGrab;
+
     private int hFloat; // 애니메이터 관련 가로축 값
     private int vFloat; // 애니메이터 관련 세로축 값
     private int groundedBool; // 애니메이터 지상 판별
+    private int grabBool; // 애니메이터 잡기 판별
     private Vector3 colExtents; // 땅과의 출동체크를 위한 충돌체 영역. (확장영역)
 
     [SerializeField] private bool hideCursor = true;
@@ -58,6 +62,7 @@ public class BehaviorController : MonoBehaviour
         myTransform = transform;
         // isGround
         groundedBool = Animator.StringToHash(FC.AnimatorKey.Grounded);
+        grabBool = Animator.StringToHash(FC.AnimatorKey.Grab); // grab 애니메이션 파라미터 추가
         colExtents = GetComponent<Collider>().bounds.extents;
 
         if (hideCursor)
@@ -118,6 +123,10 @@ public class BehaviorController : MonoBehaviour
         myAnimator.SetFloat(vFloat, v, 0.1f, Time.deltaTime);
 
         isSprint = Input.GetButton(ButtonName.Sprint);
+        isGrab = Input.GetButton(ButtonName.Grab); // Grab 상태 제어
+
+        myAnimator.SetBool(grabBool, isGrab); // 애니메이터에 grab 상태 전달
+
         if ((IsSprinting()))
         {
             changedFOV = true;

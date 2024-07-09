@@ -13,5 +13,6 @@ public class ButtonName
         Reload = "Reload", // Default reload weapon button.
         Drop = "Drop", // Default drop weapon button.
         GetTank = "InteractTank",
-        OutTank = "DisInterackTank";
+        OutTank = "DisInterackTank",
+        Grab = "Grab";
 }
