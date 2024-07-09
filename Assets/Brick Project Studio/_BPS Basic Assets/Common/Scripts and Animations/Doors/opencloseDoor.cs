@@ -22,7 +22,7 @@ namespace SojaExiles
             }
         }
 
-		void OnMouseOver()
+		void OnMouseDown()
 		{
 			{
 				if (Player)
@@ -32,20 +32,14 @@ namespace SojaExiles
 					{
 						if (open == false)
 						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
+                            StartCoroutine(opening());
+                        }
 						else
 						{
 							if (open == true)
 							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
+                                StartCoroutine(closing());
+                            }
 
 						}
 

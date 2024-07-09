@@ -9,6 +9,7 @@ TagManager:
   - BULLET
   - Target
   - babyCrib
+  - Interactable
   layers:
   - Default
   - TransparentFX
