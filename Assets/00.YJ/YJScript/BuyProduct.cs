@@ -27,7 +27,6 @@ public class BuyProduct : MonoBehaviour
             {
                 price = 70000;
                 carpet.SetActive(true);
-                MissionManager.Instance.ChangeMissionStatus(6, true);
                 SubtractFromNumber(price);
                 return;
             }
@@ -36,7 +35,6 @@ public class BuyProduct : MonoBehaviour
             {
                 price = 20000;
                 corner.SetActive(true);
-                MissionManager.Instance.ChangeMissionStatus(7, true);
                 SubtractFromNumber(price);
                 return;
             }

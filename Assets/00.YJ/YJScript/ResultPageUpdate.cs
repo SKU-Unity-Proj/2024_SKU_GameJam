@@ -23,9 +23,6 @@ public class ResultPageUpdate : MonoBehaviour
 
     private void OnEnable()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
         firstPersonCam.enabled = false;
         
         var missions = MissionManager.Instance.missions;
@@ -74,8 +71,5 @@ public class ResultPageUpdate : MonoBehaviour
     private void OnDisable()
     {
         firstPersonCam.enabled = true;
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 }

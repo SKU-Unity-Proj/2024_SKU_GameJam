@@ -125,6 +125,6 @@ public class CatchObject : MonoBehaviour
 
         }
 
-        //Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * rayDistance, Color.red, 2f);
+        Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * rayDistance, Color.red, 2f);
     }
 }
