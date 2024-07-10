@@ -6,7 +6,7 @@ public class CheckMission1 : MonoBehaviour
 {
     public GameObject coffee;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.gameObject == coffee)
         {
