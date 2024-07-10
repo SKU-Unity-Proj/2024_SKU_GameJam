@@ -28267,10 +28267,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfe4211553c6f340a9229095d5d2ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectProduct: {fileID: 0}
-  carpet: {fileID: 0}
+  buyId: 0
+  carpet: {fileID: 1632646439}
   corner: {fileID: 0}
   jokjoke: {fileID: 0}
+  numberText: {fileID: 1049786060}
 --- !u!1001 &1446058344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32355,6 +32356,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627331034}
   m_CullTransparentMesh: 1
+--- !u!1 &1632646439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5871847615224283292, guid: 7b8d9613223ef1f448bbe8fc90d8a85d, type: 3}
+  m_PrefabInstance: {fileID: 1919763165}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1633303916
 GameObject:
   m_ObjectHideFlags: 0
