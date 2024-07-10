@@ -14,7 +14,7 @@ public class ResultPageUpdate : MonoBehaviour
     public Image sliverMedal;
     public Image goldMedal;
 
-    private FirstPersonCam firstPersonCam;
+    public FirstPersonCam firstPersonCam;
 
     private void Awake()
     {
