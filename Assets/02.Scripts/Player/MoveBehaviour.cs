@@ -176,6 +176,6 @@ public class MoveBehaviour : GenericBehaviour
     public override void LocalFixedUpdate()
     {
         MovementManagement(behaviourController.GetH, behaviourController.GetV);
-        JumpManagement();
+        //JumpManagement();
     }
 }

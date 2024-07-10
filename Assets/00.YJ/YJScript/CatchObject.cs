@@ -54,6 +54,7 @@ public class CatchObject : MonoBehaviour
                     if (babyAgent != null)
                     {
                         babyAgent.EnableAgent(); // NavMeshAgent È°¼ºÈ­
+                        //SoundManager.Instance.Stop(false);
                     }
                 }
 

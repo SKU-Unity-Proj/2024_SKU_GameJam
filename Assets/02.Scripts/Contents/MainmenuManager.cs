@@ -5,6 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class MainmenuManager : MonoBehaviour
 {
+    private void Start()
+    {
+        // 메인 메뉴 BGM 재생
+        SoundManager.Instance.PlayBGM(SoundList.mainmenuSound);
+
+        // 씬 언로드 이벤트에 메서드 등록
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnDestroy()
+    {
+        // 씬 언로드 이벤트에서 메서드 해제
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    // 씬 언로드될 때 호출될 메서드
+    private void OnSceneUnloaded(Scene current)
+    {
+        SoundManager.Instance.Stop(true);
+    }
+
     // 씬 이동 함수
     public void LoadScene(string sceneName)
     {

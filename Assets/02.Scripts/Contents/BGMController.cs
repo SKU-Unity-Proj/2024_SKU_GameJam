@@ -17,17 +17,32 @@ public class BGMController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+    }
+    private void Start()
+    {
+        // 씬 언로드 이벤트에 메서드 등록
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+        SoundManager.Instance.PlayBGM(SoundList.mainstageSound1);
+        //SoundManager.Instance.PlayOneShotEffect((int)SoundList.mainstageSound1, transform.position, 0.5f);
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        // 메인 메뉴 BGM 재생
+        //SoundManager.Instance.PlayOneShotEffect();
+        
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        // 씬 언로드 이벤트에서 메서드 해제
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    // 씬 언로드될 때 호출될 메서드
+    private void OnSceneUnloaded(Scene current)
+    {
+        SoundManager.Instance.Stop(true);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

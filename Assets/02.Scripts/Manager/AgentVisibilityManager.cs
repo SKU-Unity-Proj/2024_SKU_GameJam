@@ -85,7 +85,7 @@ public class AgentVisibilityManager : MonoBehaviour
                 if (soundCoroutine != null)
                 {
                     StopCoroutine(soundCoroutine);
-                    SoundManager.Instance.Stop(true);
+                    //SoundManager.Instance.Stop(true);
                     soundCoroutine = null;
                 }
             }
