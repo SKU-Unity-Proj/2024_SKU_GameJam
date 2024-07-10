@@ -14,8 +14,8 @@ public class BuyProduct : MonoBehaviour
 
     private void Awake()
     {
-        if(jokjoke != null)
-            carpet.SetActive(false); corner.SetActive(false); jokjoke.SetActive(false);
+        if(carpet != null)
+            carpet.SetActive(false); corner.SetActive(false);
     }
 
     public void BuyProductBtn()
