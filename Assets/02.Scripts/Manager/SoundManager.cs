@@ -1,11 +1,5 @@
-﻿using NPOI.SS.Formula.Functions;
-using NPOI.SS.UserModel;
-using NPOI.Util;
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -52,42 +46,42 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
 
     void Start()
     {
-        if(this.mixer == null)
+        if (this.mixer == null)
         {
             this.mixer = Resources.Load(MixerName) as AudioMixer;
         }
-        if( this.audioRoot == null)
+        if (this.audioRoot == null)
         {
             audioRoot = new GameObject(ContainerName).transform;
             audioRoot.SetParent(transform);
             audioRoot.localPosition = Vector3.zero;
         }
-        if(fadeA_audio == null)
+        if (fadeA_audio == null)
         {
             GameObject fadeA = new GameObject(FadeA, typeof(AudioSource));
             fadeA.transform.SetParent(audioRoot);
             this.fadeA_audio = fadeA.GetComponent<AudioSource>(); // 사운드 재생.
             this.fadeA_audio.playOnAwake = false;
         }
-        if(fadeB_audio == null)
+        if (fadeB_audio == null)
         {
             GameObject fadeB = new GameObject(FadeB, typeof(AudioSource));
             fadeB.transform.SetParent(audioRoot);
             fadeB_audio = fadeB.GetComponent<AudioSource>();
             fadeB_audio.playOnAwake = false;
         }
-        if(UI_audio == null)
+        if (UI_audio == null)
         {
             GameObject ui = new GameObject(UI, typeof(AudioSource));
             ui.transform.SetParent(audioRoot);
             UI_audio = ui.GetComponent<AudioSource>();
             UI_audio.playOnAwake = false;
         }
-        if(this.effect_audios == null || this.effect_audios.Length == 0)
+        if (this.effect_audios == null || this.effect_audios.Length == 0)
         {
             this.effect_PlayStartTime = new float[EffectChannelCount];
             this.effect_audios = new AudioSource[EffectChannelCount];
-            for(int i = 0; i < EffectChannelCount; i++)
+            for (int i = 0; i < EffectChannelCount; i++)
             {
                 effect_PlayStartTime[i] = 0.0f;
                 GameObject effect = new GameObject("Effect" + i.ToString(), typeof(AudioSource));
@@ -165,7 +159,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         }
         else
         {
-            return maxVolume;   
+            return maxVolume;
         }
     }
     /// <summary>
@@ -173,7 +167,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
     /// </summary>
     void VolumeInit()
     {
-        if(this.mixer != null)
+        if (this.mixer != null)
         {
             this.mixer.SetFloat(BGMVolumeParam, GetBGMVolume());
             this.mixer.SetFloat(EffectVolumeParam, GetEffectVolume());
@@ -184,10 +178,10 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
     /// <summary>
     /// 이팩트, BGM, UI등 모든 오디오를 플레이하는 기본적인 기능
     /// </summary>
-  
+
     void PlayAudioSource(AudioSource source, SoundClip clip, float volume)
     {
-        if(source == null || clip == null)
+        if (source == null || clip == null)
         {
             return;
         }
@@ -221,11 +215,11 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
 
     public bool IsDifferentSound(SoundClip clip)
     {
-        if(clip == null)
+        if (clip == null)
         {
             return false;
         }
-        if(currentSound != null && currentSound.realID == clip.realID && IsPlaying() && currentSound.isFadeOut == false)
+        if (currentSound != null && currentSound.realID == clip.realID && IsPlaying() && currentSound.isFadeOut == false)
         {
             return false;
         }
@@ -237,25 +231,25 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
 
     private IEnumerator CheckProcess()
     {
-        while(this.isTricking == true && IsPlaying() == true)
+        while (this.isTricking == true && IsPlaying() == true)
         {
             yield return new WaitForSeconds(0.05f);
             if (this.currentSound.HasLoop())
             {
-                if(currentPlayingType == MusicPlayingType.SourceA)
+                if (currentPlayingType == MusicPlayingType.SourceA)
                 {
                     currentSound.CheckLoop(fadeA_audio);
                 }
-                else if(currentPlayingType == MusicPlayingType.SourceB)
+                else if (currentPlayingType == MusicPlayingType.SourceB)
                 {
                     currentSound.CheckLoop(fadeB_audio);
                 }
-                else if(currentPlayingType == MusicPlayingType.AtoB)
+                else if (currentPlayingType == MusicPlayingType.AtoB)
                 {
                     this.lastSound.CheckLoop(this.fadeA_audio);
                     this.currentSound.CheckLoop(this.fadeB_audio);
                 }
-                else if(currentPlayingType == MusicPlayingType.BtoA)
+                else if (currentPlayingType == MusicPlayingType.BtoA)
                 {
                     this.lastSound.CheckLoop(this.fadeB_audio);
                     this.currentSound.CheckLoop(this.fadeA_audio);
@@ -279,7 +273,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
             PlayAudioSource(fadeA_audio, currentSound, 0.0f);
             this.currentSound.FadeIn(time, ease);
             this.currentPlayingType = MusicPlayingType.SourceA;
-            if(this.currentSound.HasLoop() == true)
+            if (this.currentSound.HasLoop() == true)
             {
                 this.isTricking = true;
                 DoCheck();
@@ -296,7 +290,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
     }
     public void FadeOut(float time, Interpolate.EaseType ease)
     {
-        if(this.currentSound != null)
+        if (this.currentSound != null)
         {
             this.currentSound.FadeOut(time, ease);
         }
@@ -310,34 +304,34 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         if (currentSound == null)
         {
             return;
-        } 
-        if(currentPlayingType == MusicPlayingType.SourceA)
+        }
+        if (currentPlayingType == MusicPlayingType.SourceA)
         {
             currentSound.DoFade(Time.deltaTime, fadeA_audio);
         }
-        else if(currentPlayingType == MusicPlayingType.SourceB)
+        else if (currentPlayingType == MusicPlayingType.SourceB)
         {
             currentSound.DoFade(Time.deltaTime, fadeB_audio);
         }
-        else if(currentPlayingType == MusicPlayingType.AtoB)
+        else if (currentPlayingType == MusicPlayingType.AtoB)
         {
             this.lastSound.DoFade(Time.deltaTime, fadeA_audio);
             this.currentSound.DoFade(Time.deltaTime, fadeB_audio);
         }
-        else if(currentPlayingType == MusicPlayingType.BtoA)
+        else if (currentPlayingType == MusicPlayingType.BtoA)
         {
             this.lastSound.DoFade(Time.deltaTime, fadeB_audio);
             this.currentSound.DoFade(Time.deltaTime, fadeA_audio);
         }
-        if(fadeA_audio.isPlaying && this.fadeB_audio.isPlaying == false)
+        if (fadeA_audio.isPlaying && this.fadeB_audio.isPlaying == false)
         {
             this.currentPlayingType = MusicPlayingType.SourceA;
         }
-        else if(fadeB_audio.isPlaying && fadeA_audio.isPlaying == false)
+        else if (fadeB_audio.isPlaying && fadeA_audio.isPlaying == false)
         {
             this.currentPlayingType = MusicPlayingType.SourceB;
         }
-        else if(fadeA_audio.isPlaying == false && fadeB_audio.isPlaying == false)
+        else if (fadeA_audio.isPlaying == false && fadeB_audio.isPlaying == false)
         {
             this.currentPlayingType = MusicPlayingType.None;
         }
@@ -355,12 +349,12 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         }
         else if (this.IsDifferentSound(clip))
         {
-            if(this.currentPlayingType == MusicPlayingType.AtoB)
+            if (this.currentPlayingType == MusicPlayingType.AtoB)
             {
                 this.fadeA_audio.Stop();
                 this.currentPlayingType = MusicPlayingType.SourceB;
             }
-            else if(this.currentPlayingType == MusicPlayingType.BtoA)
+            else if (this.currentPlayingType == MusicPlayingType.BtoA)
             {
                 this.fadeB_audio.Stop();
                 this.currentPlayingType = MusicPlayingType.SourceA;
@@ -369,12 +363,12 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
             currentSound = clip;
             this.lastSound.FadeOut(time, ease);
             this.currentSound.FadeIn(time, ease);
-            if(currentPlayingType == MusicPlayingType.SourceA)
+            if (currentPlayingType == MusicPlayingType.SourceA)
             {
                 PlayAudioSource(fadeB_audio, currentSound, 0.0f);
                 currentPlayingType = MusicPlayingType.AtoB;
             }
-            else if(currentPlayingType == MusicPlayingType.SourceB)
+            else if (currentPlayingType == MusicPlayingType.SourceB)
             {
                 PlayAudioSource(fadeA_audio, currentSound, 0.0f);
                 currentPlayingType = MusicPlayingType.BtoA;
@@ -392,10 +386,12 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
     }
     public void PlayBGM(SoundClip clip)
     {
+        Debug.Log("Playing SoundClip: " + clip);
+
         if (this.IsDifferentSound(clip))
         {
-            this.fadeB_audio.Stop();
-            this.lastSound = this.currentSound;
+            //this.fadeB_audio.Stop();
+            //this.lastSound = this.currentSound;
             this.currentSound = clip;
             PlayAudioSource(fadeA_audio, clip, clip.maxVolume);
             if (currentSound.HasLoop())
@@ -405,9 +401,24 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
             }
         }
     }
+
+    public void PlayBGM(SoundList bgm)
+    {
+        Debug.Log("Playing BGM: " + bgm);
+        PlayBGM((int)bgm);
+    }
+
     public void PlayBGM(int index)
     {
+        Debug.Log("Getting SoundClip for index: " + index);
         SoundClip clip = DataManager.SoundData().GetCopy(index);
+
+        if (clip == null)
+        {
+            Debug.LogError("SoundClip is null for index: " + index);
+            return;
+        }
+        Debug.Log("Playing SoundClip: " + clip);
         PlayBGM(clip);
     }
     public void PlayUISound(SoundClip clip)
@@ -426,7 +437,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
                 isPlaySuccess = true;
                 break;
             }
-            else if(this.effect_audios[i].clip == clip.GetClip())
+            else if (this.effect_audios[i].clip == clip.GetClip())
             {
                 this.effect_audios[i].Stop();
                 PlayAudioSource(effect_audios[i], clip, clip.maxVolume);
@@ -435,14 +446,14 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
                 break;
             }
         }
-        if(isPlaySuccess == false)
+        if (isPlaySuccess == false)
         {
             // 플레이 시간이 오래된 sound 최댓값을 찾는다.
             float maxTime = 0.0f;
             int selectIndex = 0;
-            for(int i =0; i < EffectChannelCount; i++)
+            for (int i = 0; i < EffectChannelCount; i++)
             {
-                if(this.effect_PlayStartTime[i] > maxTime)
+                if (this.effect_PlayStartTime[i] > maxTime)
                 {
                     maxTime = this.effect_PlayStartTime[i];
                     selectIndex = i;
@@ -452,11 +463,11 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
 
         }
     }
-    
+
     /// <summary>
     /// 원하는 위치에 effect sound를 재생시키기 위한 함수.
     /// </summary>
-  
+
     public void PlayEffectSound(SoundClip clip, Vector3 position, float volume)
     {
         bool isPlaySuccess = false;
@@ -472,7 +483,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
             else if (this.effect_audios[i].clip == clip.GetClip())
             {
                 this.effect_audios[i].Stop();
-                PlayAudioSourceAtPoint(clip, position, volume); 
+                PlayAudioSourceAtPoint(clip, position, volume);
                 this.effect_PlayStartTime[i] = Time.realtimeSinceStartup;
                 isPlaySuccess = true;
                 break;
@@ -483,16 +494,16 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
             PlayAudioSourceAtPoint(clip, position, volume);
         }
     }
-    
+
     public void PlayOneShotEffect(int index, Vector3 position, float volume)
     {
-        if(index == (int)SoundList.None)
+        if (index == (int)SoundList.None)
         {
             return;
         }
 
         SoundClip clip = DataManager.SoundData().GetCopy(index);
-        if(clip == null)
+        if (clip == null)
         {
             return;
         }
@@ -500,7 +511,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
     }
     public void PlayOneShot(SoundClip clip)
     {
-        if(clip == null)
+        if (clip == null)
         {
             return;
         }
