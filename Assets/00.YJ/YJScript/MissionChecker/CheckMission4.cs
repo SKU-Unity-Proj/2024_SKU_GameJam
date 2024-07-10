@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckMission4 : MonoBehaviour
 {
-    public Transform baby;
+    public GameObject baby;
 
     private void OnTriggerEnter(Collider other)
     {

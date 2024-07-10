@@ -18,7 +18,8 @@ public class ResultPageUpdate : MonoBehaviour
 
     private void Awake()
     {
-        firstPersonCam = FindAnyObjectByType<FirstPersonCam>();
+        if(firstPersonCam == null)
+            firstPersonCam = FindObjectOfType<FirstPersonCam>();
     }
 
     private void OnEnable()
@@ -69,13 +70,5 @@ public class ResultPageUpdate : MonoBehaviour
             goldMedal.color = Color.black;
             babyUI.sprite = cryBaby;
         }
-    }
-
-    private void OnDisable()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        firstPersonCam.enabled = true;
     }
 }
