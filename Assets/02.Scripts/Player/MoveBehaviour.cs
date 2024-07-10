@@ -91,8 +91,21 @@ public class MoveBehaviour : GenericBehaviour
         {
             speed = sprintSpeed;
         }
+        else if (speed == 0)
+        {
+            // 감속 시간을 줄여서 더 빨리 멈추도록 설정
+            speedDampTime = 0.0f;
+        }
+        else
+        {
+            // 움직일 때는 원래의 감속 시간을 사용
+            speedDampTime = 0.05f;
+        }
+
         // 애니메이션 speed 파라미터 조정. 캐릭터의 각 모션 속도 값. ex) 수그리기, 앉기, 뛰기 등
         behaviourController.GetAnimator.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
+        // 애니메이션 speed 파라미터 조정. 캐릭터의 각 모션 속도 값. ex) 수그리기, 앉기, 뛰기 등
+        behaviourController.GetAnimator.SetFloat(speedFloat, speed);
     }
 
     private void OnCollisionStay(Collision collision) // 충돌중

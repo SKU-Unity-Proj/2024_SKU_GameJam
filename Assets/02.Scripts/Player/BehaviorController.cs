@@ -18,11 +18,9 @@ public class BehaviorController : MonoBehaviour
 
     // 캐싱.
     public Transform playerCamera;
-    public TransferFunction Checkboard;
+    public GameObject spawnedHelpObj;
     private Animator myAnimator;
     private Rigidbody myRigidbody;
-    //private ThirdPersonOrbitCam camSprint;
-    //private ThirdTankOrbitCam camSprintT;
     private Transform myTransform;
 
     //public Transform headTransform;
@@ -124,29 +122,18 @@ public class BehaviorController : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
-        myAnimator.SetFloat(hFloat, h, 0.1f, Time.deltaTime);
-        myAnimator.SetFloat(vFloat, v, 0.1f, Time.deltaTime);
+        myAnimator.SetFloat(hFloat, h);
+        myAnimator.SetFloat(vFloat, v);
 
         isSprint = Input.GetButton(ButtonName.Sprint);
 
-        /*
         if (Input.GetButtonDown(ButtonName.Grab))
         {
-            if (spawnedCheckBoard == null)
+            if (spawnedHelpObj != null)
             {
-                // 체크보드 프리팹 생성
-                Vector3 spawnPosition = headTransform.position + headTransform.forward * 1.5f;
-                Quaternion spawnRotation = Quaternion.Euler(90, 180, 0);
-                spawnedCheckBoard = Instantiate(checkBoardPrefab, spawnPosition, spawnRotation);
-            }
-            else
-            {
-                // 체크보드 프리팹 삭제
-                Destroy(spawnedCheckBoard);
+                spawnedHelpObj.SetActive(!spawnedHelpObj.activeSelf);
             }
         }
-        */
-        
 
         if ((IsSprinting()))
         {
