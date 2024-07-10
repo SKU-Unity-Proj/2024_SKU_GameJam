@@ -41,5 +41,6 @@ public enum SoundList
     mainmenuSound= 33,
     mainstageSound1= 34,
     mainstageSound2= 35,
+    click= 36,
 
 }
