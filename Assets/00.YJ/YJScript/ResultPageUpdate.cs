@@ -81,7 +81,6 @@ public class ResultPageUpdate : MonoBehaviour
         {
             //¿£µù ½¸~!
 
-            this.gameObject.SetActive(false);
         }
     }
 }
