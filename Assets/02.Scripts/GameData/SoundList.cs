@@ -37,5 +37,6 @@ public enum SoundList
     nothingVoice9= 29,
     cryVoice= 30,
     cryVoice2= 31,
+    doorOpen= 32,
 
 }

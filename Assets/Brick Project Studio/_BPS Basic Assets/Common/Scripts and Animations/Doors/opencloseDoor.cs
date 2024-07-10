@@ -12,6 +12,7 @@ namespace SojaExiles
 		public bool open;
 		public Transform Player;
 
+		private SoundList openSound, closeSound;
 		void Start()
 		{
 			open = false;
@@ -20,7 +21,11 @@ namespace SojaExiles
             {
                 Player = playerObject.transform;
             }
-        }
+
+			openSound = SoundList.doorOpen;
+			closeSound = SoundList.Land;
+
+		}
 
 		void OnMouseDown()
 		{
@@ -55,6 +60,8 @@ namespace SojaExiles
 			//("you are opening the door");
 			openandclose.Play("Opening");
 			open = true;
+
+			SoundManager.Instance.PlayOneShotEffect((int)openSound, this.transform.position, 3f);
 			yield return new WaitForSeconds(0.5f);
 		}
 
@@ -63,6 +70,8 @@ namespace SojaExiles
 			//print("you are closing the door");
 			openandclose.Play("Closing");
 			open = false;
+
+			SoundManager.Instance.PlayOneShotEffect((int)closeSound, this.transform.position, 3f);
 			yield return new WaitForSeconds(0.5f);
 		}
 

@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class ChangeSetuation : MonoBehaviour
+public class ChangeSaturation : MonoBehaviour
 {
     public Volume globalVolume; // 글로벌 볼륨 오브젝트의 Volume 컴포넌트
     private ColorAdjustments colorAdjustments;
@@ -18,21 +17,27 @@ public class ChangeSetuation : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // 오른쪽 마우스 버튼 입력을 감지합니다.
-        if (Input.GetMouseButtonDown(1))
-        {
-            IncreaseSaturation();
-        }
-    }
-
-    private void IncreaseSaturation()
+    public void OnMissionCompleted()
     {
         if (colorAdjustments != null)
         {
-            // 현재 Saturation 값을 +10 증가시킵니다.
-            colorAdjustments.saturation.value += 10f;
+            StartCoroutine(IncreaseSaturationGradually());
         }
+    }
+
+    private IEnumerator IncreaseSaturationGradually()
+    {
+        float targetSaturation = colorAdjustments.saturation.value + 10f;
+        float duration = 2f; // Saturation이 증가할 시간 (초)
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            colorAdjustments.saturation.value = Mathf.Lerp(colorAdjustments.saturation.value, targetSaturation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        colorAdjustments.saturation.value = targetSaturation; // 최종 값으로 설정
     }
 }
