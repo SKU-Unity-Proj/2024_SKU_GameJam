@@ -16,6 +16,8 @@ public class ResultPageUpdate : MonoBehaviour
 
     public FirstPersonCam firstPersonCam;
 
+    public GameObject ending;
+
     private bool isEnding = false;
 
     private void Awake()
@@ -77,10 +79,6 @@ public class ResultPageUpdate : MonoBehaviour
 
     public void Sleep()
     {
-        if (isEnding)
-        {
-            //¿£µù ½¸~!
-
-        }
+        ending.SetActive(true);
     }
 }
