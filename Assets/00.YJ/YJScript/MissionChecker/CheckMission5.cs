@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckMission5 : MonoBehaviour
 {
-    public Transform wineBottle;
+    public GameObject wineBottle;
 
     private void OnTriggerStay(Collider other)
     {
