@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using UnityEngine.Playables;
 
 public class ResultPageUpdate : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class ResultPageUpdate : MonoBehaviour
     public FirstPersonCam firstPersonCam;
 
     public GameObject ending;
+    public PlayableDirector director;
+
+    public GameObject agent;
+    public GameObject player;
+    public GameObject danger;
 
     private bool isEnding = false;
 
@@ -79,7 +85,13 @@ public class ResultPageUpdate : MonoBehaviour
 
     public void Sleep()
     {
-        SoundManager.Instance.Stop();
+        SoundManager.Instance.Stop(true);
+
+        agent.SetActive(false);
+        player.SetActive(false);
+        danger.SetActive(false);
+
         ending.SetActive(true);
+        director.Play();
     }
 }

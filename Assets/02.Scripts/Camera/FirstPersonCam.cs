@@ -72,6 +72,15 @@ public class FirstPersonCam : MonoBehaviour
         this.targetFOV = customFOV;
     }
 
+    public void offCam()
+    {
+        this.gameObject.SetActive(false);
+    }
+    public void onCam()
+    {
+        this.gameObject.GetComponent<FirstPersonCam>().enabled = true;
+    }
+
     private void Update()
     {
         angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1f, 1f) * horizontalAimingSpeed;

@@ -16,7 +16,7 @@ public class RandomVoicePlayer : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(10);  // 10초 대기
+            yield return new WaitForSeconds(15);  // 10초 대기
 
             int oldIndex = index;
             while (oldIndex == index)

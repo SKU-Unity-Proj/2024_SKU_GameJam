@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -23,6 +25,9 @@ public class Mission : MonoBehaviour
 
     private ChecklistManager checklistManager;
     private ChangeSaturation changeSaturation;
+    private int soundIndex;  // 현재 재생할 소리의 인덱스
+
+    public SoundList[] sounds;  // 재생할 소리 목록
 
     // 생성자
     public Mission(int id, string name, bool completed)
@@ -61,6 +66,7 @@ public class Mission : MonoBehaviour
             missionText.text = missionName;
             checklistManager?.UpdateChecklist(id, true);
             changeSaturation?.OnMissionCompleted();
+            PlayRandomSound();  // 미션 완료 시 랜덤 보이스 재생
             enabled = false; // 미션 완료 후 Update 호출 중지
         }
         else // 실패
@@ -69,5 +75,18 @@ public class Mission : MonoBehaviour
             missionText.text = "???";
             checklistManager?.UpdateChecklist(id, false);
         }
+    }
+
+    private void PlayRandomSound()
+    {
+        if (sounds.Length == 0) return;  // sounds 배열이 비어있을 경우 리턴
+
+        int oldIndex = soundIndex;
+        while (oldIndex == soundIndex && sounds.Length > 1)
+        {
+            soundIndex = Random.Range(0, sounds.Length);
+        }
+
+        SoundManager.Instance.PlayOneShotEffect((int)sounds[soundIndex], this.transform.position, 1.5f);
     }
 }

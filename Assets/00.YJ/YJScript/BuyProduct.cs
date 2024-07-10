@@ -10,10 +10,12 @@ public class BuyProduct : MonoBehaviour
     public GameObject carpet;
     public GameObject corner;
     public GameObject jokjoke;
+    public GameObject resultPage;
 
     public TextMeshProUGUI numberText; // UI 텍스트 컴포넌트
 
-    public PlayableDirector playableDirector;
+    public PlayableDirector playableDirectorCA;
+    public PlayableDirector playableDirectorCP;
 
     private void Awake()
     {
@@ -28,23 +30,30 @@ public class BuyProduct : MonoBehaviour
             int price = 0;
             if(buyId == 1)
             {
-                playableDirector.Play();
+                playableDirectorCA.Play();
+                this.gameObject.SetActive(false);
+                resultPage.SetActive(false);
 
                 price = 70000;
                 SubtractFromNumber(price);
 
                 Invoke("BuyId1", 1f);
+
+                //playableDirector.Stop();
                 return;
             }
 
             if (buyId == 2)
             {
-                playableDirector.Play();
+                playableDirectorCP.Play();
+                this.gameObject.SetActive(false);
+                resultPage.SetActive(false);
 
                 price = 20000;
                 SubtractFromNumber(price);
 
                 Invoke("BuyId2", 1f);
+                //playableDirector.Stop();
                 return;
             }
 

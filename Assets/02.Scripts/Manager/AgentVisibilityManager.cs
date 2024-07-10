@@ -12,7 +12,7 @@ public class AgentVisibilityManager : MonoBehaviour
 
     public float soundInterval = 1f; // 사운드 재생 간격
     public float checkInterval = 1.0f; // 시야 체크 간격
-    public float visibilityTimeout = 15.0f; // 시야에 보이지 않는 시간
+    public float visibilityTimeout = 60.0f; // 시야에 보이지 않는 시간
     public CanvasGroup alertImage; // 알림 이미지를 포함한 CanvasGroup
     public SoundList crySound;
 

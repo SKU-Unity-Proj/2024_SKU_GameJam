@@ -11267,7 +11267,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: dc25cd3d3e8e7b94e9b4b288d870f735, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 47924c786270f5a47bb76a578596bd57, type: 2}
 --- !u!4 &569290434
 Transform:
   m_ObjectHideFlags: 0
@@ -14731,6 +14731,11 @@ MonoBehaviour:
   sliverMedal: {fileID: 157017966}
   goldMedal: {fileID: 1310441796}
   firstPersonCam: {fileID: 0}
+  ending: {fileID: 0}
+  director: {fileID: 0}
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  danger: {fileID: 0}
 --- !u!4 &723020873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4730063839388620, guid: 0a39e6bc93e859145a2f868ff0277c31, type: 3}
