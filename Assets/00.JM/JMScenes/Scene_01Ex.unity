@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.41969112, g: 0.5112866, b: 0.5928676, a: 1}
+  m_IndirectSpecularColor: {r: 0.41969076, g: 0.51128614, b: 0.59286666, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1648,7 +1648,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: b4de4923092c1c344b45d1b907da9e88, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -6123,7 +6123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &296478602
 Transform:
   m_ObjectHideFlags: 0
@@ -13086,6 +13086,7 @@ MonoBehaviour:
   corner: {fileID: 5825692510208321974}
   jokjoke: {fileID: 0}
   numberText: {fileID: 1099976563}
+  playableDirector: {fileID: 76346115}
 --- !u!1001 &582168954
 PrefabInstance:
   m_ObjectHideFlags: 0

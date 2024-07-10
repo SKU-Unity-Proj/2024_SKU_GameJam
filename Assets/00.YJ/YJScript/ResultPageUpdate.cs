@@ -79,6 +79,7 @@ public class ResultPageUpdate : MonoBehaviour
 
     public void Sleep()
     {
+        SoundManager.Instance.Stop();
         ending.SetActive(true);
     }
 }

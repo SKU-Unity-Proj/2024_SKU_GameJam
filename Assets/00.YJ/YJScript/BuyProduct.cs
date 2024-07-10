@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.Playables;
 
 public class BuyProduct : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BuyProduct : MonoBehaviour
     public GameObject jokjoke;
 
     public TextMeshProUGUI numberText; // UI 텍스트 컴포넌트
+
+    public PlayableDirector playableDirector;
 
     private void Awake()
     {
@@ -25,19 +28,23 @@ public class BuyProduct : MonoBehaviour
             int price = 0;
             if(buyId == 1)
             {
+                playableDirector.Play();
+
                 price = 70000;
-                carpet.SetActive(true);
-                MissionManager.Instance.ChangeMissionStatus(6, true);
                 SubtractFromNumber(price);
+
+                Invoke("BuyId1", 1f);
                 return;
             }
 
             if (buyId == 2)
             {
+                playableDirector.Play();
+
                 price = 20000;
-                corner.SetActive(true);
-                MissionManager.Instance.ChangeMissionStatus(7, true);
                 SubtractFromNumber(price);
+
+                Invoke("BuyId2", 1f);
                 return;
             }
 
@@ -69,5 +76,17 @@ public class BuyProduct : MonoBehaviour
         int currentNumber = int.Parse(numberText.text);
         currentNumber -= amount;
         numberText.text = currentNumber.ToString();
+    }
+
+    void BuyId1()
+    {
+        carpet.SetActive(true);
+        MissionManager.Instance.ChangeMissionStatus(6, true);
+    }
+
+    void BuyId2()
+    {
+        corner.SetActive(true);
+        MissionManager.Instance.ChangeMissionStatus(7, true);
     }
 }
