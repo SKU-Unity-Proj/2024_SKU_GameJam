@@ -16,6 +16,8 @@ public class ResultPageUpdate : MonoBehaviour
 
     public FirstPersonCam firstPersonCam;
 
+    private bool isEnding = false;
+
     private void Awake()
     {
         if(firstPersonCam == null)
@@ -48,18 +50,19 @@ public class ResultPageUpdate : MonoBehaviour
         int uncompletedMissionCount = missions.Count(m => m.isCompleted);
         Debug.Log($"{uncompletedMissionCount}");
 
-        if(uncompletedMissionCount > 2)
+        if(uncompletedMissionCount > 1)
         {
             bronzeMedal.color = Color.white;
             babyUI.sprite = cryBaby;
-            if (uncompletedMissionCount > 5)
+            if (uncompletedMissionCount > 4)
             {
                 sliverMedal.color = Color.white;
                 babyUI.sprite = cryBaby;
-                if (uncompletedMissionCount > 8)
+                if (uncompletedMissionCount > 7)
                 {
                     goldMedal.color = Color.white;
                     babyUI.sprite = happyBaby;
+                    isEnding = true;
                 }  
             }
         }
@@ -69,6 +72,16 @@ public class ResultPageUpdate : MonoBehaviour
             sliverMedal.color = Color.black;
             goldMedal.color = Color.black;
             babyUI.sprite = cryBaby;
+        }
+    }
+
+    public void Sleep()
+    {
+        if (isEnding)
+        {
+            //¿£µù ½¸~!
+
+            this.gameObject.SetActive(false);
         }
     }
 }

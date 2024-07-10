@@ -11,6 +11,8 @@ TagManager:
   - babyCrib
   - Interactable
   - Agent
+  - FxTemporaire
+  - Medic
   layers:
   - Default
   - TransparentFX
