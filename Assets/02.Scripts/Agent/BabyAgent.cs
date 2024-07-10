@@ -30,7 +30,7 @@ public class BabyAgent : MonoBehaviour
     {
         if (_catchObject != null && !_catchObject.isGround)
         {
-            _agent.ResetPath();
+            //_agent.ResetPath();
             _anim.SetBool("isFall", true);
             return;
         }
@@ -41,7 +41,7 @@ public class BabyAgent : MonoBehaviour
 
             if (!_agent.isOnNavMesh || !IsOnGround())
             {
-                _agent.ResetPath();
+                //_agent.ResetPath();
                 SetAnimationState("Fall");
                 return;
             }
@@ -124,5 +124,17 @@ public class BabyAgent : MonoBehaviour
         {
             isInCrib = false;
         }
+    }
+
+    // NavMeshAgent 활성화 메소드
+    public void EnableAgent()
+    {
+        _agent.enabled = true;
+    }
+
+    // NavMeshAgent 비활성화 메소드
+    public void DisableAgent()
+    {
+        _agent.enabled = false;
     }
 }

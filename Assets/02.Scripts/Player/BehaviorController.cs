@@ -25,9 +25,9 @@ public class BehaviorController : MonoBehaviour
     //private ThirdTankOrbitCam camSprintT;
     private Transform myTransform;
 
-    public Transform headTransform;
-    public GameObject checkBoardPrefab; // 체크보드 프리팹
-    private GameObject spawnedCheckBoard; // 생성된 체크보드
+    //public Transform headTransform;
+    //public GameObject checkBoardPrefab; // 체크보드 프리팹
+    //private GameObject spawnedCheckBoard; // 생성된 체크보드
 
     // 기본 속성 값들.
     private float h; // horizontal axis
@@ -129,6 +129,7 @@ public class BehaviorController : MonoBehaviour
 
         isSprint = Input.GetButton(ButtonName.Sprint);
 
+        /*
         if (Input.GetButtonDown(ButtonName.Grab))
         {
             if (spawnedCheckBoard == null)
@@ -144,7 +145,7 @@ public class BehaviorController : MonoBehaviour
                 Destroy(spawnedCheckBoard);
             }
         }
-
+        */
         
 
         if ((IsSprinting()))

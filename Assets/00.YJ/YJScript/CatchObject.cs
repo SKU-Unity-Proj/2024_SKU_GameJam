@@ -46,6 +46,17 @@ public class CatchObject : MonoBehaviour
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                 }
+
+                // 고정 해제
+                if (fixedObject.CompareTag(agentTag))
+                {
+                    BabyAgent babyAgent = fixedObject.GetComponent<BabyAgent>();
+                    if (babyAgent != null)
+                    {
+                        babyAgent.EnableAgent(); // NavMeshAgent 활성화
+                    }
+                }
+
                 // 고정 해제
                 fixedObject = null;
                 isGround = true; // 고정 해제 시 isGround를 true로 설정
@@ -75,6 +86,13 @@ public class CatchObject : MonoBehaviour
                         fixedObject = hit.collider.gameObject;
                         //visibilityManager.SetAlertImageAlpha(0); // 아기를 잡으면 이미지 알파값을 0으로 설정
                         isGround = false; // 오브젝트 고정 시 isGround를 false로 설정
+
+                        BabyAgent babyAgent = fixedObject.GetComponent<BabyAgent>();
+                        if (babyAgent != null)
+                        {
+                            babyAgent.DisableAgent(); // NavMeshAgent 비활성화
+                        }
+
                         Debug.Log("대상 오브젝트 고정됨");
                     }
                     else
@@ -94,7 +112,16 @@ public class CatchObject : MonoBehaviour
         {
             Vector3 fixedPosition = mainCamera.transform.position + mainCamera.transform.forward * fixedDistance;
             fixedObject.transform.position = fixedPosition;
-            fixedObject.transform.rotation = mainCamera.transform.rotation;
+
+            if (fixedObject.CompareTag(agentTag))
+            {
+                fixedObject.transform.rotation = mainCamera.transform.rotation * Quaternion.Euler(-90, 180, 0);
+            }
+            else
+            {
+                fixedObject.transform.rotation = mainCamera.transform.rotation * Quaternion.Euler(90, 180, 0);
+            }
+
         }
 
         Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * rayDistance, Color.red, 2f);
