@@ -9,7 +9,7 @@ public class ChecklistManager : MonoBehaviour
     // 체크리스트를 업데이트하는 함수
     public void UpdateChecklist(int missionId, bool isCompleted)
     {
-        if (missionId >= 0 && missionId < checklistItems.Count)
+        if (missionId >= 0 && missionId <= checklistItems.Count)
         {
             checklistItems[missionId].gameObject.SetActive(isCompleted);
         }

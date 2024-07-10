@@ -6,7 +6,7 @@ public class CheckMission5 : MonoBehaviour
 {
     public Transform wineBottle;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.gameObject == wineBottle)
         {
