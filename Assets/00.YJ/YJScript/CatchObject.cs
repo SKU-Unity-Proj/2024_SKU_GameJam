@@ -20,6 +20,9 @@ public class CatchObject : MonoBehaviour
     private GameObject fixedObject = null; // 현재 고정된 오브젝트
     private AgentVisibilityManager visibilityManager; // AgentVisibilityManager 참조
 
+    private Rigidbody rb;
+    public GameObject checkBoard;
+
     void Start()
     {
         visibilityManager = FindObjectOfType<AgentVisibilityManager>();
@@ -40,7 +43,6 @@ public class CatchObject : MonoBehaviour
             if (fixedObject != null)
             {
                 // 속도 초기화
-                Rigidbody rb = fixedObject.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
                     rb.velocity = Vector3.zero;
@@ -79,13 +81,13 @@ public class CatchObject : MonoBehaviour
                     if (hit.collider.CompareTag(targetTag))
                     {
                         fixedObject = hit.collider.gameObject;
-                        //isGround = false; // 오브젝트 고정 시 isGround를 false로 설정
+                        rb = fixedObject.GetComponent<Rigidbody>();
                         Debug.Log("대상 오브젝트 고정됨");
                     }
                     if (hit.collider.CompareTag(agentTag))
                     {
                         fixedObject = hit.collider.gameObject;
-                        //visibilityManager.SetAlertImageAlpha(0); // 아기를 잡으면 이미지 알파값을 0으로 설정
+                        rb = fixedObject.GetComponent<Rigidbody>();
                         isGround = false; // 오브젝트 고정 시 isGround를 false로 설정
 
                         BabyAgent babyAgent = fixedObject.GetComponent<BabyAgent>();
@@ -118,9 +120,13 @@ public class CatchObject : MonoBehaviour
             {
                 fixedObject.transform.rotation = mainCamera.transform.rotation * Quaternion.Euler(-90, 180, 0);
             }
-            else
+            else if(fixedObject.gameObject == checkBoard)
             {
                 fixedObject.transform.rotation = mainCamera.transform.rotation * Quaternion.Euler(90, 180, 0);
+            }
+            else
+            {
+                fixedObject.transform.rotation = mainCamera.transform.rotation * Quaternion.Euler(0, 180, 0);
             }
 
         }

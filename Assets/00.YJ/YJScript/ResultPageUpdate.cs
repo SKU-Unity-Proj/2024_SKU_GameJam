@@ -66,11 +66,11 @@ public class ResultPageUpdate : MonoBehaviour
             {
                 sliverMedal.color = Color.white;
                 babyUI.sprite = cryBaby;
+                isEnding = true;
                 if (uncompletedMissionCount > 7)
                 {
                     goldMedal.color = Color.white;
                     babyUI.sprite = happyBaby;
-                    isEnding = true;
                 }  
             }
         }
@@ -85,13 +85,16 @@ public class ResultPageUpdate : MonoBehaviour
 
     public void Sleep()
     {
-        SoundManager.Instance.Stop(true);
+        if (isEnding)
+        {
+            SoundManager.Instance.Stop(true);
 
-        agent.SetActive(false);
-        player.SetActive(false);
-        danger.SetActive(false);
+            agent.SetActive(false);
+            player.SetActive(false);
+            danger.SetActive(false);
 
-        ending.SetActive(true);
-        director.Play();
+            ending.SetActive(true);
+            director.Play();
+        }
     }
 }

@@ -13,6 +13,7 @@ TagManager:
   - Agent
   - FxTemporaire
   - Medic
+  - CheckBoard
   layers:
   - Default
   - TransparentFX
