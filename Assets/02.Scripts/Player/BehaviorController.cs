@@ -19,6 +19,7 @@ public class BehaviorController : MonoBehaviour
     // 캐싱.
     public Transform playerCamera;
     public GameObject spawnedHelpObj;
+    public GameObject ChatGPT;
     private Animator myAnimator;
     private Rigidbody myRigidbody;
     private Transform myTransform;
@@ -132,6 +133,26 @@ public class BehaviorController : MonoBehaviour
             if (spawnedHelpObj != null)
             {
                 spawnedHelpObj.SetActive(!spawnedHelpObj.activeSelf);
+            }
+        }
+
+        if (Input.GetButtonDown(ButtonName.ChatGPT))
+        {
+            if (ChatGPT != null)
+            {
+                Debug.Log("!");
+                ChatGPT.SetActive(!ChatGPT.activeSelf);
+
+                if (ChatGPT.activeSelf)
+                {
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else
+                {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
             }
         }
 

@@ -8,6 +8,7 @@ public class HitOutline : MonoBehaviour
     public LayerMask layerMask;
     private float raycastDistance = 50f;
     private Outline currentOutline;
+    public GameObject gameObjectToActivate;
 
     void Update()
     {
@@ -25,6 +26,14 @@ public class HitOutline : MonoBehaviour
             if (currentOutline != null)
             {
                 currentOutline.enabled = true;
+            }
+
+            // 오브젝트의 태그가 "Game"인 경우 gameObjectToActivate를 활성화합니다.
+            if (hitObject.CompareTag("Game"))
+            {
+                gameObjectToActivate.SetActive(true);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
             }
         }
         else

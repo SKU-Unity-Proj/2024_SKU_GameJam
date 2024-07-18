@@ -11,6 +11,17 @@ public class CursorOnOff : MonoBehaviour
         firstPersonCam = FindObjectOfType<FirstPersonCam>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
+            firstPersonCam.enabled = true;
+        }
+    }
+
     public void CursorOn()
     {
         Cursor.visible = true;

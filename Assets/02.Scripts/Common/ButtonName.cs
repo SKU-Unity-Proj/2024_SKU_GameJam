@@ -14,5 +14,6 @@ public class ButtonName
         Drop = "Drop", // Default drop weapon button.
         InteractObj = "InteractObject",
         OutTank = "DisInterackTank",
-        Grab = "Grab";
+        Grab = "Grab",
+        ChatGPT = "ChatGPT";
 }
