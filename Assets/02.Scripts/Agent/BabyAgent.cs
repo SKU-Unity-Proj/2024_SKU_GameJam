@@ -66,22 +66,27 @@ public class BabyAgent : MonoBehaviour
 
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     {
+        // 주어진 반경(dist) 내에서 무작위 방향을 설정함.
         Vector3 randDirection = Random.insideUnitSphere * dist;
-        randDirection += origin;
+        randDirection += origin; // 무작위 방향에 시작 위치(origin)를 더해 최종 목적지를 결정함.
 
         NavMeshHit navHit;
+        // 유효한 NavMesh 위의 위치를 찾아 반환 (randDirection이 NavMesh 위에 있는지 확인)
         NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
 
-        return navHit.position;
+        return navHit.position;  // 유효한 위치를 반환.
     }
 
     // 애니메이션 상태를 설정하는 보조 메소드
     private void SetAnimationState(string stateName, float transitionDuration = 0.1f, int StateLayer = 0)
     {
+        // 지정된 레이어(StateLayer)에 해당 애니메이션 상태가 존재하는지 확인
         if (_anim.HasState(StateLayer, Animator.StringToHash(stateName)))
         {
+            // 지정한 상태로 부드러운 전환 효과와 함께 애니메이션을 변경함
             _anim.CrossFadeInFixedTime(stateName, transitionDuration, StateLayer);
 
+            //우선순위를 설정
             if (StateLayer == 1)
                 SetLayerPriority(1, 1);
         }

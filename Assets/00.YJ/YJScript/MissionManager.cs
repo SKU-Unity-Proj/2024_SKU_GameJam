@@ -53,6 +53,7 @@ public class MissionManager : MonoBehaviour
         Mission mission = missions.Find(m => m.id == missionId);
         if (mission != null)
         {
+            Debug.Log(mission.id);
             mission.isCompleted = isCompleted;
         }
         else

@@ -115,11 +115,13 @@ public class AgentVisibilityManager : MonoBehaviour
 
     private bool IsInView(Camera camera, GameObject target)
     {
+        // target의 월드 좌표를 뷰포트 좌표로 변환하여 카메라의 화면 안에 있는지 확인
         Vector3 screenPoint = camera.WorldToViewportPoint(target.transform.position);
         bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 
         if (onScreen)
         {
+            // 카메라와 target 사이에 장애물이 없는지 확인
             if (Physics.Linecast(camera.transform.position, target.transform.position, out RaycastHit hit))
             {
                 return hit.collider.gameObject == target;
@@ -141,6 +143,18 @@ public class AgentVisibilityManager : MonoBehaviour
             yield return StartCoroutine(Fade(1, 0, 0.5f));
         }
     }
+    private IEnumerator Fade(float startAlpha, float endAlpha, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            // alertImage의 투명도를 선형 보간하여 변경
+            alertImage.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        alertImage.alpha = endAlpha; // 최종 투명도를 설정
+    }
 
     private IEnumerator PlaySound()
     {
@@ -151,16 +165,6 @@ public class AgentVisibilityManager : MonoBehaviour
         }
     }
 
-    private IEnumerator Fade(float startAlpha, float endAlpha, float duration)
-    {
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            alertImage.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        alertImage.alpha = endAlpha;
-    }
+    
 }
 
