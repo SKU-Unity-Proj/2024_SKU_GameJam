@@ -649,7 +649,7 @@ PlayerSettings:
     PS5: 
     QNX: 
     Stadia: 
-    Standalone: 
+    Standalone: VLB_URP
     VisionOS: 
     WebGL: 
     Windows Store Apps: 

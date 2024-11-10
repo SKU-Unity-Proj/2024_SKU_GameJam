@@ -15,6 +15,10 @@ TagManager:
   - Medic
   - CheckBoard
   - Game
+  - Round
+  - Ship
+  - RollerCoaster
+  - wall
   layers:
   - Default
   - TransparentFX
@@ -35,7 +39,7 @@ TagManager:
   - Outline
   - CheckLayer
   - Daugter
-  - 
+  - Beach
   - 
   - 
   - 
