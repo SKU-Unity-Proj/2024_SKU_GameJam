@@ -48,6 +48,7 @@ public class MainmenuManager : MonoBehaviour
     // 버튼 클릭 시 호출될 함수
     public void OnPlayButtonClicked()
     {
+        Debug.Log("123");
         SoundManager.Instance.PlayOneShotEffect((int)SoundList.click, this.transform.position, 3f);
         // 이름 입력 UI 활성화
         nameInputUI.SetActive(true);
@@ -78,5 +79,11 @@ public class MainmenuManager : MonoBehaviour
     public void OnExitButtonClicked()
     {
         Application.Quit();
+    }
+
+    public void ChangeBGM()
+    {
+        // 메인 메뉴 BGM 재생
+        SoundManager.Instance.PlayBGM(SoundList.mainstageSound1);
     }
 }
